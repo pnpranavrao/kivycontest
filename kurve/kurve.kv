@@ -1,14 +1,31 @@
 #:kivy 1.0.9
 
-
 <KurveGame>:
+    size:600,600
     snake1:snake1
     snake2:snake2
-               
+    
+    Label:
+        pos:(10,250)
+        font_size:20
+        text:"Player 1" 
+        
+    Label:
+        pos:(500,250)
+        font_size:20
+        text:"Player 2"
+                      
     Snake:
         id:snake1
+        canvas:
+            Color:
+                rgb: (255,255,0)
+            
     Snake:
         id:snake2
+        canvas:
+            Color:
+                rgb: (255,0,0)
         
 <Snake>:
     size:20,20
