@@ -1,0 +1,18 @@
+#:kivy 1.0.9
+
+
+<KurveGame>:
+    snake1:snake1
+    snake2:snake2
+               
+    Snake:
+        id:snake1
+    Snake:
+        id:snake2
+        
+<Snake>:
+    size:20,20
+    canvas:
+        Ellipse:
+            size:self.size 
+            pos:self.pos    
