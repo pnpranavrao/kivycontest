@@ -13,10 +13,12 @@ from kivy.graphics import Line,Color
 class KurveApp(App):
     def build(self):
         game = KurveGame()
-        leftbtn = Button(text="left",pos = (0,500))
-        rightbtn = Button(text = "right",pos = (0,0))
-        leftbtn2 = Button(text="left",pos = (game.right,0))
-        rightbtn2 = Button(text = "right",pos = (game.right,500))
+        x = game.width
+        y = game.top
+        leftbtn = Button(text="left",pos=(0,y),size=(x/8,y/5))
+        rightbtn = Button(text = "right",pos = (0,0),size=(x/8,y/5))
+        leftbtn2 = Button(text="left",pos = (x,0),size=(x/8,y/5))
+        rightbtn2 = Button(text = "right",pos = (x,y),size=(x/8,y/5))
         game.add_widget(leftbtn)
         game.add_widget(rightbtn)
         game.add_widget(leftbtn2)
@@ -34,6 +36,7 @@ class KurveApp(App):
             game.snake2.velocity = Vector(*game.snake2.velocity).rotate(90)
         def turn_right2(obj):
             game.snake2.velocity = Vector(*game.snake2.velocity).rotate(270)
+            
         leftbtn.bind(on_press = turn_left)
         rightbtn.bind(on_release = turn_right)
         leftbtn2.bind(on_press = turn_left2)
@@ -41,8 +44,6 @@ class KurveApp(App):
         return game
         
 class KurveGame(Widget):
-    snake1 = ObjectProperty(None)
-    snake2 = ObjectProperty(None)
     a = dict()
     a['hello'] = 2 #These two steps are done just so that the dict is properly initialized.
     data = DictProperty(a)
@@ -50,20 +51,25 @@ class KurveGame(Widget):
     popup1 = Popup(title = "Winner",content = Label(text='Player1 wins'),size = (300,300))
     popup2 = Popup(title = "Winner",content = Label(text='Player2 wins'),size = (300,300))
     
+    snake1 = ObjectProperty(None)
+    snake2 = ObjectProperty(None)
+    
     def stop(dt):
             exit(1)
             print "hello"
     t = Clock.create_trigger(stop,timeout = 2)
     
     def begin(self):
-        self.snake1.pos = self.pos[0],self.pos[1]+300
+        self.snake1.pos = self.x,self.y
         self.data["line1_x"] = [self.snake1.pos[0]]
         self.data["line1_y"] = [self.snake1.pos[1]]
         self.data['current1'] = [(self.snake1.pos[0],self.snake1.pos[1]),(self.snake1.pos[0],self.snake1.pos[1])]
-        self.snake2.pos = self.width,self.y+150
+        
+        self.snake2.pos = self.width,self.top
         self.data["line2_x"] = [self.snake2.pos[0]]
         self.data["line2_y"] = [self.snake2.pos[1]]
         self.data['current2'] = [(self.snake2.pos[0],self.snake2.pos[1]),(self.snake2.pos[0],self.snake2.pos[1])]
+        
         self.snake1.velocity = (10,0)
         self.snake2.velocity = (-10,0)
         with self.canvas:
@@ -77,8 +83,6 @@ class KurveGame(Widget):
         self.snake1.current1(self.data)
         self.snake2.move2(self.data)
         self.snake2.current2(self.data)
-        #print self.data['line1_x']
-        #self.check()
         
     def check(self,dt):
         val = self.data

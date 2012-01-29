@@ -1,20 +1,23 @@
 #:kivy 1.0.9
 
 <KurveGame>:
-    size:600,600
+    size:(800,800)
+    pos:(0,0)
     snake1:snake1
     snake2:snake2
     
-    Label:
-        pos:(10,250)
-        font_size:20
-        text:"Player 1" 
+    
+    #Label:
+        #size_hint: (0.5,0.5)
+        #pos_hint:(0.1,0.5)
+        #font_size:20
+        #text:"Player 1" 
         
-    Label:
-        pos:(500,250)
-        font_size:20
-        text:"Player 2"
-                      
+    #Label:
+        #pos_hint:(1,1)
+        #font_size:20
+        #text:"Player 2"
+            
     Snake:
         id:snake1
         canvas:
@@ -32,4 +35,4 @@
     canvas:
         Ellipse:
             size:self.size 
-            pos:self.pos    
+            pos:self.pos   
