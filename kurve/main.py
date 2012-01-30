@@ -10,6 +10,7 @@ from kivy.clock import Clock
 from kivy.properties import ObjectProperty,DictProperty
 from kivy.graphics import Line,Color,Rectangle
 import math
+import sys
 
 class KurveApp(App):
     def build(self):
@@ -68,8 +69,8 @@ class KurveGame(Widget):
             Rectangle(pos=(0,0),size=(x,y/60))
             Rectangle(pos=(x-x/60,0),size=(x/60,y))
             Rectangle(pos=(0,y-y/60),size=(x,y/60))
-        self.data['div']=(150.0,150.0)
-        self.data['pix']=(600.0,600.0)
+        self.data['div']=(100.0,100.0)
+        self.data['pix']=(800.0,800.0)
         divx,divy = int(self.data['div'][0]),int(self.data['div'][1])
         
         self.data['occupied'] = list()
@@ -82,16 +83,18 @@ class KurveGame(Widget):
             self.data['occupied'][i*divx]=1
         for i in range(1,divy+1):
             self.data['occupied'][(i*divx)-1]=1
-
+        '''
+        Uncomment this to check if initial matrix is generated properly
         for i in range(divy):
             for j in range(divx):
                 print self.data['occupied'][(i*divx)+j],
             print "\n"
+        '''
 
         self.snake1.pos = self.width/6,self.top/6
         self.snake2.pos = self.width*5/6,self.top*5/6
-        self.snake1.velocity = (7,0)
-        self.snake2.velocity = (-7,0)
+        self.snake1.velocity = (8,0)
+        self.snake2.velocity = (-8,0)
         with self.canvas:
             Color(255,255,0)
             self.data["line1"] = Line(points = (self.snake1.center_x,self.snake1.center_y))
@@ -112,20 +115,23 @@ class KurveGame(Widget):
         
 class Snake(Widget):
     def move1(self,data):
+        self.check(data)
         self.pos = Vector(*self.velocity)+self.pos
         data["line1"].points += (self.center_x,self.center_y)
         n = self.convert(data)
         print n
         data['occupied'][n] = 1
-        self.check(data)
+        
         
     def move2(self,data):
+        self.check(data)
         self.pos = Vector(*self.velocity)+self.pos
         data["line2"].points += (self.center_x,self.center_y)
         n = self.convert(data)
-        data['occupied'][n] = 1
         print "    ",n
-        self.check(data)
+        data['occupied'][n] = 1
+        
+        
         
     def convert(self,data):
         x_pix,y_pix = data['pix']
@@ -133,7 +139,7 @@ class Snake(Widget):
         x,y = self.pos
         x = math.floor(float(x)/float(x_pix/divx))
         y = math.floor(float(y)/float(y_pix/divy))
-        n = (divx-1)*y + x
+        n = (divx)*y + x
         if n<divx*divy:
             return int(n)
         else:
@@ -144,12 +150,12 @@ class Snake(Widget):
         x_pix,y_pix = data['pix']
         divx,divy = data['div']
         x,y = pos
-        x = math.ceil(float(x)/float(x_pix/divx))
+        x = math.floor(float(x)/float(x_pix/divx))
         y = math.floor(float(y)/float(y_pix/divy))
         n = (divx)*y + x
         if n<divx*divy:
-            print "check at",int(n)
             print "----------"
+            print "check at",pos,int(n)
             return int(n)
         else:
             print "large value",n,self.pos,x,y
@@ -158,8 +164,21 @@ class Snake(Widget):
     def check(self,data):
         pos = Vector(*self.velocity)+self.pos
         if data['occupied'][self.convert1(pos,data)]==1:
-            print "Died at",pos,self.convert1(pos,data)
+            print self.uid,"Died at",pos,self.convert1(pos,data)
             print "game over"
+            divx,divy = int(data['div'][0]),int(data['div'][1])
+            m = dict()
+            string = ""
+            for i in range(divy):
+                string = ""
+                for j in range(divx):
+                    string  += str(data['occupied'][(i*divx)+j])
+                    #sys.stdout.write(str(data['occupied'][(i*divx)+j]))
+                #print "\n
+                m[str(i)]=str(string)
+            for i in range(divy-1,-1,-1):
+                print m[str(i)]
+                
             exit(1)
             
         

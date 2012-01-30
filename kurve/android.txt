@@ -1,0 +1,3 @@
+title=Kurve
+author=Pranav Rao
+orientation=portrait
