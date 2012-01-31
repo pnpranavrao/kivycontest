@@ -10,4 +10,9 @@ At people who have been directed to this project to learn about Kivy,the framewo
 
 * I have used kivy.core.audio for playing a catchy track during the game. While this runs smoothly on my Ubuntu machine, the App force closed on an android tablet. So if you are trying this on Android, do comment out the sections by searching for "audio android" in main.py
 
-
+* I had a nice time figuring out how to detect collisions in what appears to be a simple game at first sight. I went from an 
+    * O(n^2) implementation ( I was checking each point on snake1 with each point on snake2)
+    * to an O(n) implementation which was horribly innacurate(It used to check for occupied areas around a bounding box near each snake's head)
+    * To finally maintain a central boolean array of occupied places. This is so simple and efficient and remains so even when I add more snakes into the game.I should probably admit that Stack Overflow nudged me in this direction.
+    
+    
