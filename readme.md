@@ -29,7 +29,30 @@ At people who have been directed to this project to learn about Kivy,the framewo
     : This is accomplished by faster and slower velocities of the snakes respectively)
 * Add more spice to the game canvas by introducing speed-up collectibles, snake length-reducers and other usual arcade game items :)
 * Support 4 players
-    : This can also be implemented in just a couple of hours as the collision detection mechanism remains the same.
+    : This can also be implemented in just a couple of hours as the collision detection mechanism remains the same. Just 2 new objects need to be created.
+* Graphics need a major overhaul. 
+    : This will take time as I need to read about them first.
+    
+##### Better code :
+
+* Implement basic polymorphism in some critical parts of the code
+    : For e.g currently there are 2 methods move1 and move2 for each snake :|
+    
+* Like I mentioned before, I need to use the .kv paradigm more. A lot of time and callbacks can be saved
+
+* Implement auto resolution
+    : Try as much as I did, I couldn't get the size_hint and pos_hint working. Need to ask the kivy_support group for help.
+
+##### Other stuff :
+
+* Contribute to Kivy!
+    : There was no way in the world that I could have coded up a fully functional app(albeit without audio), which runs on all major platforms, and is written in the most awesome language there is : Python, without Kivy. 'nuff said. :)
+* Publish in the android market
+* Write a blog post detailing all your 'aha!' moments and what you thought was missing from the (pretty comprehensive) documentation.
+    : e.g : Using FloatLayout as the start screen and the root widget was a definite Aha! moment. I struggled around for hours trying how to invoke different screens and then I stumbled across FloatLayout in one of the test apps.
+* Research up a proper software licence for this project.
+    
+
 
 
     
