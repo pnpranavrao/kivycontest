@@ -1,4 +1,9 @@
-This is an entry for the Kivy game design competition (Jan 31st 2011)
+This is an entry for the Kivy game design competition (Jan 31st 2011).
+
+It is hugely inspired by [Achtung Die Kurve](http://en.wikipedia.org/wiki/Achtung,_die_Kurve!), the classic 1990s game that I had played as a kid, and [Tron](http://en.wikipedia.org/wiki/Tron:_Legacy) - the movie with its futuristic graphics.
+I have named this app as Kron, short for Kivy + Tron :)
+
+--------------------------------------------------------------------------------------
 
 By no means is this piece of software a finished piece. I was pretty crunched for time when I decided to enter the game design competition, so I couldn't honour many Python idioms when coding this up. Forget Python idioms, to get stuff working at times I chose to overrule many basic OOP concepts as I had recently learnt them up and didn't have the luxury of implementing them out due to lack of time. 
 
@@ -16,6 +21,8 @@ At people who have been directed to this project to learn about Kivy,the framewo
     * O(n^2) implementation ( I was checking each point on snake1 with each point on snake2)
     * to an O(n) implementation which was horribly innacurate(It used to check for occupied areas around a bounding box near each snake's head)
     * To finally maintain a central boolean array of occupied places. This is so simple and efficient and remains so, even when I add more snakes into the game.I should probably admit that Stack Overflow nudged me in this direction. Also python must have a O(log n) complexity look up a particular index of a 1D array. So,my algo has the same complexity. :)
+    
+* The right and left turns in the game are with respect to the current direction of snake. It takes some time to get used to this, especially when the snake is going reverse.
     
 * I wish I made more use of the .kv file and the instant updation that it offers.
 
