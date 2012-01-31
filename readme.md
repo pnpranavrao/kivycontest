@@ -21,7 +21,8 @@ At people who have been directed to this project to learn about Kivy,the framewo
     * O(n^2) implementation ( I was checking each point on snake1 with each point on snake2)
     * to an O(n) implementation which was horribly innacurate(It used to check for occupied areas around a bounding box near each snake's head)
     * To finally maintain a central boolean array of occupied places. This is so simple and efficient and remains so, even when I add more snakes into the game.I should probably admit that Stack Overflow nudged me in this direction. Also python must have a O(log n) complexity look up a particular index of a 1D array. So,my algo has the same complexity. :)
-    
+I would never have had this flexibility and agility in core logic in any other language than Python.
+
 * The right and left turns in the game are with respect to the current direction of snake. It takes some time to get used to this, especially when the snake is going reverse.
     
 * I wish I made more use of the .kv file and the instant updation that it offers.
