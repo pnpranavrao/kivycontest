@@ -23,8 +23,8 @@ class KurveApp(App):
         self.sound = SoundLoader.load(filename = 'song.mp3')
         self.sound.play()
         loadscreen = Image(source='intro.png')
-        x,y = 1280,800
-        print self
+        x,y = 1280,736
+        
         
         start = Button(text = "PLAY! ",font_size = 30,pos = (x-x*3/8,y/10),size=(x/4,y/8))
         help1 = Button(text = "Help",font_size = 20,pos = (x/8,y/10),size=(x/8,y/8))
@@ -37,7 +37,7 @@ class KurveApp(App):
 
     def loadhelp(self,obj):
         app = self
-        x,y = 1280,800
+        x,y = 1280,736
         self.root.clear_widgets()
         helpimg = Image(source = 'help.jpg')
         back = Button(text = "Got it. Lets Play!",font_size = 25,pos = (x-x*3/8,y/10),size=(x/4,y/8))
@@ -105,8 +105,8 @@ class KurveGame(Widget):
             Rectangle(pos=(0,0),size=(x,y/80))
             Rectangle(pos=(x-x/126,0),size=(x/126,y))
             Rectangle(pos=(0,y-y/80),size=(x,y/80))
-        self.data['div']=(160.0,100.0)
-        self.data['pix']=(1280.0,800.0)
+        self.data['div']=(160.0,92.0)
+        self.data['pix']=(1280.0,736.0)
         divx,divy = int(self.data['div'][0]),int(self.data['div'][1])
         
         self.data['occupied'] = list()
@@ -167,7 +167,7 @@ class Snake(Widget):
         self.pos = Vector(*self.velocity)+self.pos
         data["line1"].points += (self.center_x,self.center_y)
         n = self.convert(data)
-        print n
+        #print n
         data['occupied'][n] = 1
         return True
         
@@ -177,7 +177,7 @@ class Snake(Widget):
         self.pos = Vector(*self.velocity)+self.pos
         data["line2"].points += (self.center_x,self.center_y)
         n = self.convert(data)
-        print "    ",n
+        #print "    ",n
         data['occupied'][n] = 1
         return True
         
@@ -217,7 +217,7 @@ class Snake(Widget):
         pos = Vector(*self.velocity)+self.pos
         if data['occupied'][self.convert1(pos,data)]==1:
             #Uncomment the following to debug
-            
+            '''
             print self.uid,"Died at",pos,self.convert1(pos,data)
             print "game over"
             divx,divy = int(data['div'][0]),int(data['div'][1])
@@ -232,20 +232,14 @@ class Snake(Widget):
                 m[str(i)]=str(string)
             for i in range(divy-1,-1,-1):
                 print m[str(i)]
-              
+            '''  
             return(1)
             
-        
-        
-
-    
-        
 Factory.register("KurveGame",KurveGame)
 Factory.register("Snake",Snake)
    
 if __name__ in ('__main__'):
     #Config.set('kivy','fullscreen','1')
     #Config.write()
-    while True:
-        KurveApp().run()     
+    KurveApp().run()     
         
