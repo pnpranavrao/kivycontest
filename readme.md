@@ -28,7 +28,7 @@ At people who have been directed to this project to learn about Kivy,the framewo
     
 * I wish I made more use of the .kv file and the instant updation that it offers.
 
-### The road ahead:
+### The road ahead/My To-do:
 
 ##### More game features:
 
