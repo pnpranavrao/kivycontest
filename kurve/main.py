@@ -14,15 +14,17 @@ from kivy.graphics import Line,Color,Rectangle
 from kivy.config import Config
 import math
 import sys
+#android audio. Comment the next line
 from kivy.core.audio import SoundLoader
 
 class KurveApp(App):
     def build(self):
         #game = KurveGame()
         self.root = FloatLayout()
-        self.sound = SoundLoader.load(filename = 'song.mp3')
+        #android audio. Comment next 2 lines to use on android
+        self.sound = SoundLoader.load(filename = 'assets/song.mp3')
         self.sound.play()
-        loadscreen = Image(source='intro.png')
+        loadscreen = Image(source='assets/intro.png')
         x,y = 1280,736
         
         
@@ -39,11 +41,10 @@ class KurveApp(App):
         app = self
         x,y = 1280,736
         self.root.clear_widgets()
-        helpimg = Image(source = 'help.jpg')
+        helpimg = Image(source = 'assets/help.jpg')
         back = Button(text = "Got it. Lets Play!",font_size = 25,pos = (x-x*3/8,y/10),size=(x/4,y/8))
         helpimg.add_widget(back)
         self.root.add_widget(helpimg)
-        #Need to work this part out
         def backfn(obj):
             self.startgame(app)
         back.bind(on_press = backfn)
@@ -51,10 +52,6 @@ class KurveApp(App):
     
 
     def startgame(self,obj):
-        '''
-        sound = SoundLoader.load(filename = 'song.mp3')
-        sound.play()
-        '''
         self.root.clear_widgets()
         game = KurveGame()
         x = game.width
@@ -68,7 +65,7 @@ class KurveApp(App):
         game.add_widget(leftbtn2)
         game.add_widget(rightbtn2)
         game.begin(self,self.root)
-        Clock.schedule_interval(game.update,1.0/20.0)
+        Clock.schedule_interval(game.update,1.0/15.0)
                     
         def turn_left(obj):
             game.snake1.velocity = Vector(*game.snake1.velocity).rotate(90)
@@ -138,8 +135,8 @@ class KurveGame(Widget):
             Color(0,191,255)
             self.data["line2"] = Line(points = (self.snake2.center_x,self.snake2.center_y))
     #Change these images
-    winner1 = Image(source = 'bluewins.jpg')
-    winner2 = Image(source = 'yellowwins.jpg')
+    winner1 = Image(source = 'assets/bluewins.jpg')
+    winner2 = Image(source = 'assets/yellowwins.jpg')
    
     def update(self,dt):
         a = self.snake1.move1(self.data)
