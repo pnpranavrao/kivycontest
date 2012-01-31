@@ -20,12 +20,14 @@ class KurveApp(App):
     def build(self):
         #game = KurveGame()
         self.root = FloatLayout()
+        self.sound = SoundLoader.load(filename = 'song.mp3')
+        self.sound.play()
         loadscreen = Image(source='intro.png')
         x,y = 1280,800
         print self
         
-        start = Button(text = "START",pos = (x-x*3/8,y/10),size=(x/4,y/8))
-        help1 = Button(text = "help",pos = (x/8,y/10),size=(x/8,y/8))
+        start = Button(text = "PLAY! ",font_size = 30,pos = (x-x*3/8,y/10),size=(x/4,y/8))
+        help1 = Button(text = "Help",font_size = 20,pos = (x/8,y/10),size=(x/8,y/8))
         start.bind(on_press = self.startgame)
         help1.bind(on_press = self.loadhelp)
         loadscreen.add_widget(start)
@@ -34,35 +36,39 @@ class KurveApp(App):
         return self.root
 
     def loadhelp(self,obj):
+        app = self
+        x,y = 1280,800
         self.root.clear_widgets()
         helpimg = Image(source = 'help.jpg')
-        back = Button(text = "Go back",pos = (500,0),size = (100,100))
+        back = Button(text = "Got it. Lets Play!",font_size = 25,pos = (x-x*3/8,y/10),size=(x/4,y/8))
         helpimg.add_widget(back)
         self.root.add_widget(helpimg)
         #Need to work this part out
         def backfn(obj):
-            self.build()
+            self.startgame(app)
         back.bind(on_press = backfn)
         return self.root
     
 
     def startgame(self,obj):
+        '''
         sound = SoundLoader.load(filename = 'song.mp3')
         sound.play()
+        '''
         self.root.clear_widgets()
         game = KurveGame()
         x = game.width
         y = game.top
-        leftbtn = Button(text = "left",pos = (0,y-y/7),size=(x/12,y/7))
-        rightbtn = Button(text = "right",pos = (0,0),size=(x/12,y/7))
-        leftbtn2 = Button(text="left",pos = (x-x/12,0),size=(x/12,y/7))
-        rightbtn2 = Button(text = "right",pos = (x-x/12,y-y/7),size=(x/12,y/7))
+        leftbtn = Button(text = "left",pos = (0,y-y/6),size=(x/12,y/6))
+        rightbtn = Button(text = "right",pos = (0,0),size=(x/12,y/6))
+        leftbtn2 = Button(text="left",pos = (x-x/12,0),size=(x/12,y/6))
+        rightbtn2 = Button(text = "right",pos = (x-x/12,y-y/6),size=(x/12,y/6))
         game.add_widget(leftbtn)
         game.add_widget(rightbtn)
         game.add_widget(leftbtn2)
         game.add_widget(rightbtn2)
         game.begin(self,self.root)
-        Clock.schedule_interval(game.update,1.0/10.0)
+        Clock.schedule_interval(game.update,1.0/20.0)
                     
         def turn_left(obj):
             game.snake1.velocity = Vector(*game.snake1.velocity).rotate(90)
@@ -211,7 +217,7 @@ class Snake(Widget):
         pos = Vector(*self.velocity)+self.pos
         if data['occupied'][self.convert1(pos,data)]==1:
             #Uncomment the following to debug
-            '''
+            
             print self.uid,"Died at",pos,self.convert1(pos,data)
             print "game over"
             divx,divy = int(data['div'][0]),int(data['div'][1])
@@ -226,7 +232,7 @@ class Snake(Widget):
                 m[str(i)]=str(string)
             for i in range(divy-1,-1,-1):
                 print m[str(i)]
-            '''    
+              
             return(1)
             
         
