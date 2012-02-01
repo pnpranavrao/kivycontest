@@ -26,7 +26,7 @@ At people who have been directed to this project to learn about Kivy,the framewo
     
 * I wish I made more use of the .kv file and the instant updation that it offers.
 
-### The road ahead:
+### The road ahead/My To-do:
 
 ##### More game features:
 
@@ -58,6 +58,12 @@ At people who have been directed to this project to learn about Kivy,the framewo
 * Write a blog post detailing all your 'aha!' moments and what you thought was missing from the (pretty comprehensive) documentation.
     : e.g : Using FloatLayout as the start screen and the root widget was a definite Aha! moment. I struggled around for hours trying how to invoke different screens and then I stumbled across FloatLayout in one of the test apps.
 * Research up a proper software licence for this project.
+
+### Credits
+
+* The music track is Daft Punk's "Derezzed". (Great music!)
+* Most of the images I have used in the game are from free wallpapers released around the movie Tron.
+
     
 
 
