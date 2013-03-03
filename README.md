@@ -1,1 +1,1 @@
-I this article is boring. 
+My take on the article.My comments.
